@@ -1,5 +1,8 @@
-﻿namespace Library.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Library.Models
 {
+    [Table("People")]
     public class Person
     {
         public int Id { get; set; }
