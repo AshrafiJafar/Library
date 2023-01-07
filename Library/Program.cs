@@ -1,4 +1,6 @@
 using Library.Models;
+using Library.Repositories.Implementation;
+using Library.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(op => {
     op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddScoped<ISportTypeRepository, SportTypeRepository>();
 
 var app = builder.Build();
 
