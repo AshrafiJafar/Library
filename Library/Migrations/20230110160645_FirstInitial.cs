@@ -28,7 +28,8 @@ namespace Library.Migrations
                     Height = table.Column<int>(type: "int", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
                     Balance = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumberOfChilds = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

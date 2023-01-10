@@ -1,5 +1,5 @@
 ﻿using Library.Models;
-using Library.Repositories.Interfaces;
+using Library.Repositories.Interface;
 
 namespace Library.Repositories.Implementation
 {

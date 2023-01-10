@@ -1,6 +1,8 @@
 using Library.Models;
 using Library.Repositories.Implementation;
-using Library.Repositories.Interfaces;
+using Library.Repositories.Interface;
+using Library.Services.Implementation;
+using Library.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(op => {
 });
 
 builder.Services.AddScoped<ISportTypeRepository, SportTypeRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IRegisterPersonService, RegisterPersonService>();
 
 var app = builder.Build();
 

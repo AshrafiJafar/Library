@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230103162843_FirstInitial")]
+    [Migration("20230110160645_FirstInitial")]
     partial class FirstInitial
     {
         /// <inheritdoc />
@@ -186,6 +186,9 @@ namespace Library.Migrations
             modelBuilder.Entity("Library.Models.Teacher", b =>
                 {
                     b.HasBaseType("Library.Models.Person");
+
+                    b.Property<int>("NumberOfChilds")
+                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("Teacher");
                 });

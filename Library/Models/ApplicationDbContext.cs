@@ -16,5 +16,18 @@ namespace Library.Models
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeachersTime> TeachersTimes { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Person>().Ignore(x => x.Age);
+            modelBuilder.Entity<Person>().Property(x => x.BirthDate)
+                .HasColumnType(System.Data.SqlDbType.Date.ToString());
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
+
+
+    
 }

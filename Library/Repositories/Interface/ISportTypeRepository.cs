@@ -1,6 +1,6 @@
 ﻿using Library.Models;
 
-namespace Library.Repositories.Interfaces
+namespace Library.Repositories.Interface
 {
     public interface ISportTypeRepository
     {

@@ -1,6 +1,6 @@
 ﻿
 using Library.Models;
-using Library.Repositories.Interfaces;
+using Library.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
@@ -8,29 +8,18 @@ namespace Library.Controllers
     public class HomeController : Controller
     {
         private readonly ISportTypeRepository sportTypeRepository;
+        private readonly ApplicationDbContext db;
 
-        public HomeController(ISportTypeRepository sportTypeRepository)
+        public HomeController(ISportTypeRepository sportTypeRepository, ApplicationDbContext db)
         {
             this.sportTypeRepository = sportTypeRepository;
+            this.db = db;
         }
         public IActionResult Index()
         {
-            //var person = new Person()
-            //{
-            //    Address = "Tehran",
-            //    Age = 30,
-            //    Balance = 40_000,
-            //    BirthDate = new DateTime(1987, 6, 21),
-            //    FirstName = "Jafar",
-            //    LastName = "Ashrafi",
-            //    Height = 180,
-            //    Weight = 68,
-            //    Mobile = "+905508357911",
-            //    NationalCode = "1347531598",
-            //    PhoneNumber = "1234567890",
-            //};
-            //db.People.Add(person);
-
+            var person = new Person();
+            person.BirthDate = new DateTime(1987, 06, 21);
+            
             var sportType = new SportType { Name = "Body building" };
             sportTypeRepository.Create(sportType);
 

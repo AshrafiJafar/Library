@@ -2,7 +2,6 @@
 
 namespace Library.Models
 {
-    [Table("Teachers")]
     public class Teacher : Person
     {
         public int NumberOfChilds { get; set; }
