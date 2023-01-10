@@ -10,11 +10,8 @@ namespace Library.Models
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        [DataType("Date")]
         public DateTime BirthDate { get; set; }
-        [NotMapped]
         public int Age { get { return (DateTime.Now.Year - BirthDate.Year); } }
-
         public string NationalCode { get; set; }
         public string Address { get; set; }
         public string Mobile { get; set; }
