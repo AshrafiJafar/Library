@@ -1,0 +1,47 @@
+﻿@model RegisterPersonCommand
+
+<form method="post">
+
+    <div class="row g-3">
+        <div class="col-sm">
+            @Html.TextBoxFor(x => x.FirstName,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.FirstName)})
+        </div>
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.LastName,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.LastName)})
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(x => x.NationalCode,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.NationalCode)})
+        </div>
+    </div>
+
+    
+    <div class="row g-3">
+        <div class="col-sm">
+            @Html.TextBoxFor(x => x.BirthDate,"MM/dd/yyyy", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.BirthDate)})
+        </div>
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.Height,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.Height)})
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(x => x.Weight,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.Weight)})
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-sm">
+            @Html.TextBoxFor(x => x.PhoneNumber,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.PhoneNumber)})
+        </div>
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.Mobile,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.Mobile)})
+        </div>
+        <div class="col-sm">
+            @Html.TextAreaFor(x => x.Address,2,3, new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.Address)})
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-sm">
+            <button type="submit" class="btn btn-success">Submit</button>
+            <a class="btn btn-secondary" href="person/index">Cancel</a>
+        </div>
+    </div>
+</form>

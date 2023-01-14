@@ -17,12 +17,6 @@ namespace Library.Controllers
         }
         public IActionResult Index()
         {
-            var person = new Person();
-            person.BirthDate = new DateTime(1987, 06, 21);
-            
-            var sportType = new SportType { Name = "Body building" };
-            sportTypeRepository.Create(sportType);
-
             return View();
         }
 
