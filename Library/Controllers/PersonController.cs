@@ -7,14 +7,17 @@ namespace Library.Controllers
     public class PersonController : Controller
     {
         private readonly IRegisterPersonService registerPersonService;
+        private readonly IPeopleService peopleService;
 
-        public PersonController(IRegisterPersonService registerPersonService)
+        public PersonController(IRegisterPersonService registerPersonService, IPeopleService peopleService)
         {
             this.registerPersonService = registerPersonService;
+            this.peopleService = peopleService;
         }
         public IActionResult Index()
         {
-            return View();
+            var people = peopleService.GetAllPeople();
+            return View(people);
         }
 
         [HttpGet]

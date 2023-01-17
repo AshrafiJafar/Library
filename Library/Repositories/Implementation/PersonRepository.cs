@@ -16,5 +16,10 @@ namespace Library.Repositories.Implementation
             db.People.Add(person);
             db.SaveChanges();
         }
+
+        public List<Person> GetAll()
+        {
+            return db.People.ToList();
+        }
     }
 }
