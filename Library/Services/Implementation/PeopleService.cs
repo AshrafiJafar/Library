@@ -16,5 +16,10 @@ namespace Library.Services.Implementation
         {
             return personRepository.GetAll();
         }
+
+        public Person GetPerson(int id)
+        {
+            return personRepository.GetPersonById(id);
+        }
     }
 }

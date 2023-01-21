@@ -2,8 +2,9 @@
 
 namespace Library.Services.Interface
 {
-    public interface IRegisterPersonService
+    public interface ICommandPersonService
     {
         void RegisterPerson(RegisterPersonCommand command);
+        void EditPerson(EditPersonCommand command);
     }
 }

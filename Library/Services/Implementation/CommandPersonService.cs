@@ -5,14 +5,15 @@ using Library.Services.Interface;
 
 namespace Library.Services.Implementation
 {
-    public class RegisterPersonService : IRegisterPersonService
+    public class CommandPersonService : ICommandPersonService
     {
         private readonly IPersonRepository personRepository;
 
-        public RegisterPersonService(IPersonRepository personRepository)
+        public CommandPersonService(IPersonRepository personRepository)
         {
             this.personRepository = personRepository;
         }
+
         public void RegisterPerson(RegisterPersonCommand command)
         {
             var person = new Person()
@@ -29,5 +30,25 @@ namespace Library.Services.Implementation
             };
             personRepository.CreatePerson(person);
         }
+
+
+        public void EditPerson(EditPersonCommand command)
+        {
+            var person = personRepository.GetPersonById(command.Id);
+
+            person.FirstName = command.FirstName;
+            person.LastName = command.LastName;
+            person.BirthDate = command.BirthDate;
+            person.Weight = command.Weight;
+            person.Height = command.Height;
+            person.PhoneNumber = command.PhoneNumber;
+            person.Mobile = command.Mobile;
+            person.Address = command.Address;
+            person.NationalCode = command.NationalCode;
+
+            personRepository.Update(person);
+
+        }
+
     }
 }

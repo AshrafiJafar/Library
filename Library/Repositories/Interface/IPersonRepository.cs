@@ -6,5 +6,8 @@ namespace Library.Repositories.Interface
     {
         void CreatePerson(Person person);
         List<Person> GetAll();
+
+        Person GetPersonById(int id);
+        void Update(Person person);
     }
 }

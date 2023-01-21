@@ -21,5 +21,16 @@ namespace Library.Repositories.Implementation
         {
             return db.People.ToList();
         }
+
+        public Person GetPersonById(int id)
+        {
+            return db.People.Single(x => x.Id == id);
+        }
+
+        public void Update(Person person)
+        {
+            db.Entry(person).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+        }
     }
 }
