@@ -19,6 +19,7 @@ builder.Services.AddScoped<ISportTypeRepository, SportTypeRepository>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<ICommandPersonService, CommandPersonService>();
 builder.Services.AddScoped<IPeopleService, PeopleService>();
+builder.Services.AddScoped<IPeopleService, PeopleService>();
 
 var app = builder.Build();
 
