@@ -9,5 +9,6 @@ namespace Library.Repositories.Interface
 
         Person GetPersonById(int id);
         void Update(Person person);
+        public void Delete(int id);
     }
 }

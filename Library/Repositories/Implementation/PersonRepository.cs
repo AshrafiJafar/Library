@@ -32,5 +32,11 @@ namespace Library.Repositories.Implementation
             db.Entry(person).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             db.SaveChanges();
         }
+        public void Delete(int id)
+        {
+            db.People.Remove(GetPersonById(id));
+            db.SaveChanges();
+
+        }
     }
 }
