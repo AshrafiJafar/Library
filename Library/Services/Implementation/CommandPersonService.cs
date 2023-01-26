@@ -50,5 +50,11 @@ namespace Library.Services.Implementation
 
         }
 
+        public void DeletePerson(DeletePersonCommand command)
+        {
+            var person = personRepository.GetPersonById(command.Id);
+            personRepository.Delete(command.Id);
+
+        }
     }
 }
