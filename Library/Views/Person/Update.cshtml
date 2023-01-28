@@ -1,0 +1,96 @@
+﻿@model Library.Models.Command.UpdatePersonCommand
+
+<form method="post">
+    <div class="row">
+        <div class="col-md-6 ">
+
+
+
+            <div class="row mb-3">
+                @Html.TextBoxFor(x=>x.Id,"",new{type="hidden"})
+                <div class="col-md-6">
+                    @Html.LabelFor(x=>x.FirstName,"First Name",new {@class="form-label"})
+                    <div class="underline-textbox">
+                        @Html.TextBoxFor(x=>x.FirstName,"",new{@class="form-control"})
+                        <div class="underline"></div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(x=>x.LastName,"Last Name",new {@class="form-label"})
+                    <div class="underline-textbox">
+                        @Html.TextBoxFor(x=>x.LastName,"",new{@class="form-control"})
+                        <div class="underline"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    @Html.LabelFor(x=>x.NationalCode,"National Code",new {@class="form-label"})
+                    <div class="underline-textbox">
+                        @Html.TextBoxFor(x=>x.NationalCode,"",new{@class="form-control"})
+                        <div class="underline"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(x=>x.BirthDate,"Birth Date",new {@class="form-label"})
+                    <div class="underline-textbox">
+                        @Html.TextBox(nameof(Model.BirthDate),Model.BirthDate.ToString("yyyy-MM-dd"),new{@class="form-control",type="date"})
+                        <div class="underline"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    @Html.LabelFor(x=>x.PhoneNumber,"Phone Number",new {@class="form-label"})
+                    <div class="underline-textbox">
+                        @Html.TextBoxFor(x=>x.PhoneNumber,"",new{@class="form-control"})
+                        <div class="underline"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(x=>x.Mobile,"Mobile",new {@class="form-label"})
+                    <div class="underline-textbox">
+                        @Html.TextBoxFor(x=>x.Mobile,"",new{@class="form-control"})
+                        <div class="underline"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    @Html.LabelFor(x=>x.Weight,"Weight (Kg)",new {@class="form-label"})
+                    <div class="underline-textbox">
+                        @Html.TextBoxFor(x=>x.Weight,"",new{@class="form-control", type="number"})
+                        <div class="underline"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(x=>x.Height,"Height (cm)",new {@class="form-label"})
+                    <div class="underline-textbox">
+                        @Html.TextBoxFor(x=>x.Height,"",new{@class="form-control",type="number"})
+                        <div class="underline"></div>
+                    </div>
+                </div>
+            </div>
+
+            @Html.LabelFor(x=>x.Address,"Address",new {@class="form-label"})
+            <div class="underline-textbox">
+                @Html.TextBoxFor(x=>x.Address,"",new{@class="form-control mb-5"})
+                <div class="underline"></div>
+            </div>
+
+            <input type="submit" style="width:100px;height:35px;text-align:center" class="btn btn-success fw-bold btn-green-animation" value="Edit" />
+            <a href="/" class="btn fw-bold btn-danger btn-red-animation" style="width:100px;height:35px">Cancel</a>
+        </div>
+        <div class="col-md-6">
+            <div class="validation-sum alert-danger">
+                @Html.ValidationSummary()
+            </div>
+        </div>
+    </div>
+
+
+</form>

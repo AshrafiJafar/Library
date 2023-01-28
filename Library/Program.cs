@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 builder.Services.AddDbContext<ApplicationDbContext>(op => {
     op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -17,7 +18,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(op => {
 
 builder.Services.AddScoped<ISportTypeRepository, SportTypeRepository>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
-builder.Services.AddScoped<IRegisterPersonService, RegisterPersonService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
+
 
 var app = builder.Build();
 
@@ -34,6 +36,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Person}/{action=Index}/{id?}");
 
 app.Run();

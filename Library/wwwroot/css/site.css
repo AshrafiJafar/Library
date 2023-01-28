@@ -20,3 +20,54 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.underline-textbox{
+    position:relative;
+}
+
+.underline-textbox .underline{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+}
+.underline-textbox input{
+    box-shadow:none !important;
+    outline:none !important;
+}
+.underline-textbox .underline::before{
+    content:"";
+    position:absolute;
+    height:3px;
+    width:0;
+    background-color:dodgerblue;
+    bottom:0;
+    left:0;
+    transition:1s;
+}
+
+.underline-textbox input:focus ~ .underline::before{
+        width:100%;
+}
+.btn-green-animation,.btn-red-animation{
+    transition:.5s;
+}
+.btn-green-animation:hover{
+    background-color:white;
+    color:forestgreen;
+}
+
+.btn-red-animation:hover {
+        background-color: white;
+        color: red;
+    }
+
+.validation-sum{
+    border-radius:20px;
+    padding:10px;
+    transition:2s;
+}
+.validation-sum li{
+    color:red;
+    margin-bottom:5px;
+}

@@ -2,8 +2,10 @@
 
 namespace Library.Models.Command
 {
-    public class RegisterPersonCommand
+    public class UpdatePersonCommand
     {
+        [Required]
+        public int Id { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
