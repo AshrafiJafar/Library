@@ -34,32 +34,79 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NationalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mobile)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Balance)
-            </td>
-            <td>
-                <a href="Person/Edit?personId=@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NationalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+                <td>
+                    <a href="Person/Edit?personId=@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a href="#" onclick="deletePerson(@item.Id, '@item.FirstName', '@item.LastName', event)">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+@section Scripts{
+    <script>
+        function deletePerson(id, firstName, lastname, e) {
+            bootbox.confirm({
+                size: 'small',
+                buttons: {
+                    confirm: {
+                        label: "Yes",
+                        className: "btn-success"
+                    },
+                    cancel: {
+                        label: "No",
+                        className: "btn-danger"
+                    }
+                },
+                message: 'Are you sure to delete ' + firstName + ' ' + lastname + '?',
+                callback: function (result) {
+                    if (result === true) {
+
+                        $.ajax({
+                            url: "/Person/Delete/" + id,
+                            method:"Post",
+                            success: function (result) {
+                                //window.location.reload();
+
+                                $(e.target).closest('tr').remove();
+
+
+                            },
+                            error: function (result) {
+                                
+                            }
+                        });
+
+
+                    }
+
+                }
+            });
+        }
+
+
+    </script>
+}

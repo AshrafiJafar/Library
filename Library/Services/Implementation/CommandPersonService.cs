@@ -50,5 +50,9 @@ namespace Library.Services.Implementation
 
         }
 
+        public void DeletePerson(int id)
+        {
+            personRepository.Remove(id);
+        }
     }
 }

@@ -62,5 +62,11 @@ namespace Library.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public void Delete(int id)
+        {
+            commandPersonService.DeletePerson(id);
+        }
+
     }
 }

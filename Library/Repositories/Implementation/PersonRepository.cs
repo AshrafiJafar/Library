@@ -27,9 +27,17 @@ namespace Library.Repositories.Implementation
             return db.People.Single(x => x.Id == id);
         }
 
+        
         public void Update(Person person)
         {
             db.Entry(person).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void Remove(int id)
+        {
+            var person = GetPersonById(id);
+            db.People.Remove(person);
             db.SaveChanges();
         }
     }

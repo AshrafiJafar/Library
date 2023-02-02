@@ -8,6 +8,7 @@ namespace Library.Repositories.Interface
         List<Person> GetAll();
 
         Person GetPersonById(int id);
+        void Remove(int id);
         void Update(Person person);
     }
 }
