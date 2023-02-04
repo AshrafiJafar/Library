@@ -1,13 +1,15 @@
 ﻿@model RegisterPersonCommand
-
-<form method="post">
+@{
+    Layout = null;
+}
+<form method="post" id="create-form">
 
     <div class="row g-3">
         <div class="col-sm">
             @Html.TextBoxFor(x => x.FirstName,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.FirstName)})
             @Html.ValidationMessageFor(x => x.FirstName, "",new{@class="text-danger"})
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm">
             @Html.TextBoxFor(x => x.LastName,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.LastName)})
             @Html.ValidationMessageFor(x => x.LastName, "",new{@class="text-danger"})
         </div>
@@ -23,7 +25,7 @@
             @Html.TextBoxFor(x => x.BirthDate,"MM/dd/yyyy", new {@class="form-control datepicker", @placeholder=Html.DisplayNameFor(x => x.BirthDate)})
             @Html.ValidationMessageFor(x => x.BirthDate, "",new{@class="text-danger"})
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm">
             @Html.TextBoxFor(x => x.Height,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.Height)})
             @Html.ValidationMessageFor(x => x.Height, "" ,new{@class="text-danger"})
         </div>
@@ -38,7 +40,7 @@
             @Html.TextBoxFor(x => x.PhoneNumber,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.PhoneNumber)})
             @Html.ValidationMessageFor(x => x.PhoneNumber, "",new{@class="text-danger"})
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm">
             @Html.TextBoxFor(x => x.Mobile,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.Mobile)})
             @Html.ValidationMessageFor(x => x.Mobile ,"",new{@class="text-danger"})
         </div>
@@ -47,12 +49,7 @@
             @Html.ValidationMessageFor(x => x.Address, "",new{@class="text-danger"})
         </div>
     </div>
-    <div class="row g-3">
-        <div class="col-sm">
-            <button type="submit" class="btn btn-success">Submit</button>
-            <a class="btn btn-secondary" href="person/index">Cancel</a>
-        </div>
-    </div>
+    
 </form>
 
 

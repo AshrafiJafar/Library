@@ -23,14 +23,15 @@ namespace Library.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return PartialView("_Create");
         }
 
         [HttpPost]
         public IActionResult Create(RegisterPersonCommand command)
         {
             commandPersonService.RegisterPerson(command);
-            return RedirectToAction("Index");
+            var people = peopleService.GetAllPeople();
+            return PartialView("_tableBody", people);
         }
 
         [HttpGet]
@@ -65,6 +66,7 @@ namespace Library.Controllers
         [HttpPost]
         public void Delete(int id)
         {
+            throw new Exception("Error Happened in Delete");
             commandPersonService.DeletePerson(id);
         }
 
