@@ -9,7 +9,10 @@
 <p>
     <a href="#" onclick="addPerson()">Create New</a>
 </p>
-<table class="table">
+
+
+
+<table class="table" id="table-people">
     <thead>
         <tr>
             <th>
@@ -46,7 +49,7 @@
 
             var dialog = bootbox.confirm(
                 {
-                    size: 'large',
+                    size: 'xl',
                     title: "Add Person",
                     message: "Loading ...",
                     buttons: {
@@ -68,7 +71,7 @@
                                 method: "Post",
                                 data: formData,
                                 success: function (data) {
-
+                                    dialog.modal("hide");
                                     $('tbody').html(data);
 
                                 },
@@ -78,8 +81,8 @@
                             });
 
 
+                            return false;
                         }
-
                     }
                 }
             );
