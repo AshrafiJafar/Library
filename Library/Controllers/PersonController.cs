@@ -35,9 +35,9 @@ namespace Library.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int personId)
+        public IActionResult Edit(int Id)
         {
-            var person = peopleService.GetPerson(personId);
+            var person = peopleService.GetPerson(Id);
 
             var command = new EditPersonCommand()
             {
@@ -53,20 +53,20 @@ namespace Library.Controllers
                 Weight = person.Weight
             };
 
-            return View(command);
+            return PartialView(command);
         }
 
         [HttpPost]
         public IActionResult Edit(EditPersonCommand command)
         {
             commandPersonService.EditPerson(command);
-            return RedirectToAction("Index");
+            var people = peopleService.GetAllPeople();
+            return PartialView("_tableBody", people);
         }
 
         [HttpPost]
         public void Delete(int id)
         {
-            throw new Exception("Error Happened in Delete");
             commandPersonService.DeletePerson(id);
         }
 

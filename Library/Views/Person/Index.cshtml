@@ -47,11 +47,11 @@
 
         function addPerson() {
 
-            var dialog = bootbox.confirm(
+            var dialogAdd = bootbox.confirm(
                 {
-                    size: 'xl',
+                    size: 'large',
                     title: "Add Person",
-                    message: "Loading ...",
+                    message: "Loading...",
                     buttons: {
                         confirm: {
                             label: "Submit",
@@ -64,14 +64,13 @@
                     },
                     callback: function (result) {
                         if (result === true) {
-
                             var formData = $("#create-form").serializeArray();
                             $.ajax({
                                 url: "/Person/Create",
                                 method: "Post",
                                 data: formData,
                                 success: function (data) {
-                                    dialog.modal("hide");
+                                    dialogAdd.modal("hide");
 
                                     $('tbody').html(data);
 
@@ -80,35 +79,72 @@
 
                                 }
                             });
-
-
                             return false;
                         }
                     }
                 }
             );
-            dialog.init(function () {
-
+            dialogAdd.init(function () {
                 $.ajax({
                     url: "/Person/Create",
                     method: "Get",
                     success: function (data) {
-                        dialog.find(".bootbox-body").html(data);
+                        dialogAdd.find(".bootbox-body").html(data);
                     },
                     error: function (result) {
-
                     }
                 });
-
             });
-
-
-
         }
 
 
-
-
+        function editPerson(id) {
+            var dialogEdit = bootbox.confirm(
+                {
+                    size: 'large',
+                    title: "Edit Person",
+                    message: "Loading...",
+                    buttons: {
+                        confirm: {
+                            label: "Save",
+                            className: "btn-success"
+                        },
+                        cancel: {
+                            label: "Cancel",
+                            className: "btn-danger"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result === true) {
+                            var formData = $("#edit-form").serializeArray();
+                            $.ajax({
+                                url: "/Person/Edit/" + id,
+                                method: "Post",
+                                data: formData,
+                                success: function (data) {
+                                    dialogEdit.modal("hide");
+                                    $('tbody').html(data);
+                                },
+                                error: function (result) {
+                                }
+                            });
+                            return false;
+                        }
+                    }
+                }
+            );
+            dialogEdit.init(function () {
+                $.ajax({
+                    url: "/Person/Edit/" + id,
+                    method: "Get",
+                    success: function (data) {
+                        dialogEdit.find(".bootbox-body").html(data);
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+        }
 
 
         function deletePerson(id, firstName, lastname, e) {
@@ -147,7 +183,6 @@
                 }
             );
         }
-
 
     </script>
 }
