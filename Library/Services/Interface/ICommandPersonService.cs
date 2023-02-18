@@ -7,5 +7,6 @@ namespace Library.Services.Interface
         void RegisterPerson(RegisterPersonCommand command);
         void EditPerson(EditPersonCommand command);
         void DeletePerson(int id);
+        void IncreaseBalance(IncreaseBalance command);
     }
 }

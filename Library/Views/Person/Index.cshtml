@@ -101,13 +101,125 @@
                 });
 
             });
-
-
-
         }
 
 
+        function edit(id) {
 
+            var dialog = bootbox.confirm(
+                {
+                    size: 'xl',
+                    title: "Add Person",
+                    message: "Loading ...",
+                    buttons: {
+                        confirm: {
+                            label: "Submit",
+                            className: "btn-success"
+                        },
+                        cancel: {
+                            label: "Cancel",
+                            className: "btn-danger"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result === true) {
+
+                            var formData = $("#edit-form").serializeArray();
+                            $.ajax({
+                                url: "/Person/Edit",
+                                method: "Post",
+                                data: formData,
+                                success: function (data) {
+                                    dialog.modal("hide");
+
+                                    $('tbody').html(data);
+
+                                },
+                                error: function (result) {
+
+                                }
+                            });
+
+
+                            return false;
+                        }
+                    }
+                }
+            );
+            dialog.init(function () {
+
+                $.ajax({
+                    url: "/Person/Edit/" + id,
+                    method: "Get",
+                    success: function (data) {
+                        dialog.find(".bootbox-body").html(data);
+                    },
+                    error: function (result) {
+
+                    }
+                });
+
+            });
+        }
+
+
+        function balanceIncrement(id) {
+
+            var dialog = bootbox.confirm(
+                {
+                    size: 'small',
+                    title: "Add Person",
+                    message: "Loading ...",
+                    buttons: {
+                        confirm: {
+                            label: "Submit",
+                            className: "btn-success"
+                        },
+                        cancel: {
+                            label: "Cancel",
+                            className: "btn-danger"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result === true) {
+
+                            var formData = $("#balance-form").serializeArray();
+                            $.ajax({
+                                url: "/Person/Balance",
+                                method: "Post",
+                                data: formData,
+                                success: function (data) {
+                                    dialog.modal("hide");
+
+                                    $('tbody').html(data);
+
+                                },
+                                error: function (result) {
+
+                                }
+                            });
+
+
+                            return false;
+                        }
+                    }
+                }
+            );
+            dialog.init(function () {
+
+                $.ajax({
+                    url: "/Person/Balance/" + id,
+                    method: "Get",
+                    success: function (data) {
+                        dialog.find(".bootbox-body").html(data);
+                    },
+                    error: function (result) {
+
+                    }
+                });
+
+            });
+        }
 
 
 

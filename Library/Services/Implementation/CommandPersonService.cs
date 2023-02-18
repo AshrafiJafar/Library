@@ -54,5 +54,10 @@ namespace Library.Services.Implementation
         {
             personRepository.Remove(id);
         }
+
+        public void IncreaseBalance(IncreaseBalance command)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

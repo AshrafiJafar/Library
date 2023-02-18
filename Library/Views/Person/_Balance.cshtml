@@ -1,0 +1,28 @@
+﻿@model IncreaseBalance
+@{
+    Layout = null;
+}
+<form method="post" id="edit-form">
+
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="row g-3">
+        <label>Increament for: <strong style="color:blue">@Model.FirstName  @Model.LastName</strong></label>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-sm-8">
+            @Html.TextBoxFor(x => x.Balance,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.Balance)})
+            @Html.ValidationMessageFor(x => x.Balance, "",new{@class="text-danger"})
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <label>Previous balance: <strong style="color:blue">@Model.Balance.ToString("#,0")</strong></label>
+    </div>
+
+    <div class="row g-3">
+        <label>Balance after increment: <strong style="color:blue">0000000</strong></label>
+    </div>
+
+</form>
