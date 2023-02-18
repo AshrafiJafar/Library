@@ -23,7 +23,7 @@
                 @Html.DisplayFor(modelItem => item.Balance)
             </td>
             <td>
-                <a href="Person/Edit?personId=@item.Id">Edit</a> |
+            <a href="#" onclick="editPerson(@item.Id)">Edit</a>|
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a href="#" onclick="deletePerson(@item.Id, '@item.FirstName', '@item.LastName', event)">Delete</a>
             </td>
