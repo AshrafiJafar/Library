@@ -57,7 +57,15 @@ namespace Library.Services.Implementation
 
         public void IncreaseBalance(IncreaseBalance command)
         {
-            throw new NotImplementedException();
+            if(command.Balance <= 0)
+            {
+                throw new Exception("Balance could not be zero or minus.");
+            }
+            var person = personRepository.GetPersonById(command.Id);
+
+            person.Balance += command.Balance;
+
+            personRepository.Update(person);
         }
     }
 }

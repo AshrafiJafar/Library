@@ -1,6 +1,19 @@
 ﻿@model IEnumerable<Library.Models.Person>
 
 
+    <style>
+        .fa.button{
+            padding-right:5px;
+            padding-left:5px;
+        }
+
+    .fa.button:hover{
+        opacity: 0.7;
+        cursor:pointer;
+    }
+
+    </style>
+
 @foreach (var item in Model)
 {
     <tr>
@@ -23,10 +36,10 @@
              @item.Balance.ToString("#,0")
         </td>
         <td>
-            <a href="#" onclick="edit(@item.Id)">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a href="#" onclick="deletePerson(@item.Id, '@item.FirstName', '@item.LastName', event)">Delete</a> |
-            <a href="#" onclick="balanceIncrement(@item.Id)">Balance</a>
+            <i class="fa fa-pencil button" data-toggle="tooltip"  title="Edit" style="color:blue;" onclick="edit(@item.Id)"></i>
+            <i class="fa fa-info button" data-toggle="tooltip" title="Detail" style="color:darkgoldenrod;"></i>
+            <i class="fa fa-trash-o button" data-toggle="tooltip" title="Delete" style="color:red;" onclick="deletePerson(@item.Id, '@item.FirstName', '@item.LastName', event)"></i>
+            <i class="fa fa-check button" data-toggle="tooltip" title="Balance increase" style="color:green;" onclick="balanceIncrement(@item.Id)"></i>
         </td>
     </tr>
 }

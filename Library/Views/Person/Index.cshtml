@@ -45,6 +45,10 @@
 @section Scripts{
     <script>
 
+        $('[data-toggle="tooltip"]').tooltip({
+            position: { my: "left+3 bottom-3"/*, at: "right center"*/ }
+        });
+
         function addPerson() {
 
             var dialog = bootbox.confirm(
@@ -195,7 +199,7 @@
 
                                 },
                                 error: function (result) {
-
+                                    debugger;
                                 }
                             });
 

@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-<form method="post" id="edit-form">
+<form method="post" id="balance-form">
 
     @Html.HiddenFor(x => x.Id)
 
@@ -12,7 +12,8 @@
 
     <div class="row g-3">
         <div class="col-sm-8">
-            @Html.TextBoxFor(x => x.Balance,"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.Balance)})
+            @Html.TextBox(nameof(Model.Balance),"", new {@class="form-control", @placeholder=Html.DisplayNameFor(x => x.Balance),
+            oninput = "updateFinalValue("+Model.Balance+")", @value = ""})
             @Html.ValidationMessageFor(x => x.Balance, "",new{@class="text-danger"})
         </div>
     </div>
@@ -22,7 +23,25 @@
     </div>
 
     <div class="row g-3">
-        <label>Balance after increment: <strong style="color:blue">0000000</strong></label>
+        <label>
+            Balance after increment: 
+            <strong id="new-balance" style="color:blue">
+                @Model.Balance
+            </strong>
+        </label>
     </div>
 
 </form>
+
+<script>
+
+    function updateFinalValue(previousBalance) {
+
+        var addedBalance = $("#Balance").val();
+        var newBalance = parseInt(addedBalance) + previousBalance;
+        $("#new-balance").html(newBalance);
+
+    }
+
+
+</script>
