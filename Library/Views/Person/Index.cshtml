@@ -10,7 +10,17 @@
     <a href="#" onclick="addPerson()">Create New</a>
 </p>
 
+<style>
+    .fa.button {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
 
+        .fa.button:hover {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+</style>
 
 <table class="table" id="table-people">
     <thead>
@@ -45,9 +55,7 @@
 @section Scripts{
     <script>
 
-        $('[data-toggle="tooltip"]').tooltip({
-            position: { my: "left+3 bottom-3"/*, at: "right center"*/ }
-        });
+        //$('[data-toggle="tooltip"]').tooltip();
 
         function addPerson() {
 
@@ -171,7 +179,7 @@
 
             var dialog = bootbox.confirm(
                 {
-                    size: 'small',
+                    size: 'large',
                     title: "Add Person",
                     message: "Loading ...",
                     buttons: {
@@ -193,14 +201,12 @@
                                 method: "Post",
                                 data: formData,
                                 success: function (data) {
+                                    debugger;
                                     dialog.modal("hide");
-
                                     $('tbody').html(data);
 
                                 },
-                                error: function (result) {
-                                    debugger;
-                                }
+                                error: function (data) { }
                             });
 
 

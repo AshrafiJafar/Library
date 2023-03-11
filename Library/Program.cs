@@ -1,3 +1,4 @@
+using Library.Middlwares;
 using Library.Models;
 using Library.Repositories.Implementation;
 using Library.Repositories.Interface;
@@ -28,6 +29,9 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
+app.UseErrorHandler();
+
 app.UseStaticFiles();
 
 app.UseRouting();

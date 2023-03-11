@@ -31,7 +31,7 @@ namespace Library.Controllers
         {
             commandPersonService.RegisterPerson(command);
             var people = peopleService.GetAllPeople();
-            return PartialView("_tableBody", people);
+            return PartialView("_TableBody", people);
         }
 
         [HttpGet]
@@ -61,7 +61,7 @@ namespace Library.Controllers
         {
             commandPersonService.EditPerson(command);
             var people = peopleService.GetAllPeople();
-            return PartialView("_tableBody", people);
+            return PartialView("_TableBody", people);
         }
 
         [HttpPost]
@@ -92,7 +92,7 @@ namespace Library.Controllers
         {
             commandPersonService.IncreaseBalance(command);
             var people = peopleService.GetAllPeople();
-            return PartialView("_tableBody", people);
+            return PartialView("_TableBody", people);
         }
 
 
