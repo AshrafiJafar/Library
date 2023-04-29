@@ -1,9 +1,11 @@
 ﻿using Library.Models.Command;
 using Library.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
 {
+    [Authorize]
     public class PersonController : Controller
     {
         private readonly ICommandPersonService commandPersonService;
