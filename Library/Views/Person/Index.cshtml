@@ -51,7 +51,6 @@
     </tbody>
 </table>
 
-
 @section Scripts{
     <script>
 
@@ -76,6 +75,13 @@
                     },
                     callback: function (result) {
                         if (result === true) {
+
+                            $("#create-form").removeData("unobtrusiveValidation");
+                            $.validator.unobtrusive.parse($("#create-form"));
+                            if (! $("#create-form").valid()){
+                                $("#create-form").validate();
+                                return false;
+                            }
 
                             var formData = $("#create-form").serializeArray();
                             $.ajax({
@@ -135,6 +141,13 @@
                     },
                     callback: function (result) {
                         if (result === true) {
+
+                            $("#edit-form").removeData("unobtrusiveValidation");
+                            $.validator.unobtrusive.parse($("#edit-form"));
+                            if (!$("#edit-form").valid()) {
+                                $("#edit-form").validate();
+                                return false;
+                            }
 
                             var formData = $("#edit-form").serializeArray();
                             $.ajax({

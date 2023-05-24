@@ -11,18 +11,37 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(option =>
 {
     option.SignIn.RequireConfirmedAccount = false;
+    option.Password.RequiredLength = 2;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireDigit = false;
+    option.Password.RequiredUniqueChars = 2;
+    option.Password.RequireLowercase = false;
+    option.Password.RequireUppercase = false;
+
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-        options.SlidingExpiration = true;
-        options.LoginPath = "/Account/Login";
-    });
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.SlidingExpiration = true;
+});
+
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,options =>
+//    {
+//        options.ExpireTimeSpan = TimeSpan.FromSeconds(5);
+//        options.Cookie.Expiration = TimeSpan.FromSeconds(5);
+//        options.SlidingExpiration = true;
+//        options.LoginPath = "/Account/Loginnn";
+//    });
+
 builder.Services.AddScoped<SignInManager<IdentityUser>>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -37,6 +56,7 @@ builder.Services.AddScoped<ISportTypeRepository, SportTypeRepository>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<ICommandPersonService, CommandPersonService>();
 builder.Services.AddScoped<IPeopleService, PeopleService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
@@ -51,6 +71,8 @@ app.UseErrorHandler();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

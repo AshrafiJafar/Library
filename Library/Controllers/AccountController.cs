@@ -18,8 +18,8 @@ namespace Library.Controllers
 
         public async Task<IActionResult> CreateUser()
         {
-            var identityUser = new IdentityUser("admin");
-            var result = await userManager.CreateAsync(identityUser, "QWErty123@@");
+            var identityUser = new IdentityUser("admin2");
+            var result = await userManager.CreateAsync(identityUser, "123");
 
             return Redirect("/Person/Index");
         }
@@ -34,7 +34,7 @@ namespace Library.Controllers
         public async Task<IActionResult> Login(LoginCommand command)
         {
 
-            var result = await signInManager.PasswordSignInAsync(command.UserName, command.Password, false, false);
+            var result = await signInManager.PasswordSignInAsync(command.UserName, command.Password, true, false);
 
             if(result.Succeeded)
             {
@@ -42,6 +42,20 @@ namespace Library.Controllers
             }
             ViewBag.Error = "Incorrect username or password";
             return View(command);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Person");
+        }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+
+            return View();
         }
     }
 }
