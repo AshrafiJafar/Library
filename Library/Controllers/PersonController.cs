@@ -33,8 +33,8 @@ namespace Library.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(RegisterPersonCommand command)
         {
-            commandPersonService.RegisterPerson(command);
-            await userService.CreatePersonUser(command.NationalCode, command.NationalCode);
+            var id = commandPersonService.RegisterPerson(command);
+            await userService.CreatePersonUser(command.NationalCode, command.NationalCode, id.ToString());
             var people = peopleService.GetAllPeople();
             return PartialView("_TableBody", people);
         }

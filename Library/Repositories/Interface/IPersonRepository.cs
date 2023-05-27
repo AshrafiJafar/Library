@@ -4,7 +4,7 @@ namespace Library.Repositories.Interface
 {
     public interface IPersonRepository
     {
-        void CreatePerson(Person person);
+        int CreatePerson(Person person);
         List<Person> GetAll();
 
         Person GetPersonById(int id);

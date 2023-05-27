@@ -14,7 +14,7 @@ namespace Library.Services.Implementation
             this.personRepository = personRepository;
         }
 
-        public void RegisterPerson(RegisterPersonCommand command)
+        public int RegisterPerson(RegisterPersonCommand command)
         {
             var person = new Person()
             {
@@ -28,7 +28,7 @@ namespace Library.Services.Implementation
                 NationalCode = command.NationalCode,
                 PhoneNumber = command.PhoneNumber,
             };
-            personRepository.CreatePerson(person);
+            return personRepository.CreatePerson(person);
         }
 
 

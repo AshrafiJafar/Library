@@ -11,10 +11,11 @@ namespace Library.Repositories.Implementation
         {
             this.db = db;
         }
-        public void CreatePerson(Person person)
+        public int CreatePerson(Person person)
         {
             db.People.Add(person);
             db.SaveChanges();
+            return person.Id;
         }
 
         public List<Person> GetAll()

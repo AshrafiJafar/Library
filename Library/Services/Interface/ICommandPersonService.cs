@@ -4,7 +4,7 @@ namespace Library.Services.Interface
 {
     public interface ICommandPersonService
     {
-        void RegisterPerson(RegisterPersonCommand command);
+        int RegisterPerson(RegisterPersonCommand command);
         void EditPerson(EditPersonCommand command);
         void DeletePerson(int id);
         void IncreaseBalance(IncreaseBalance command);

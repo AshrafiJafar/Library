@@ -34,11 +34,29 @@ namespace Library.Controllers
         public async Task<IActionResult> Login(LoginCommand command)
         {
 
+            if (command.ReturnUrl == "/")
+                command.ReturnUrl = null;
+
             var result = await signInManager.PasswordSignInAsync(command.UserName, command.Password, true, false);
 
-            if(result.Succeeded)
+            var user = await userManager.FindByNameAsync(command.UserName);
+            var claims = await userManager.GetClaimsAsync(user);
+            var id = claims.SingleOrDefault(x => x.Type == "id")?.Value;
+            var isSalonAdmin = await userManager.IsInRoleAsync(user, "SalonAdmin");
+            var isTeacherUser = await userManager.IsInRoleAsync(user, "Teacher");
+            var isPersonUser = await userManager.IsInRoleAsync(user, "Person");
+
+            if (result.Succeeded && isSalonAdmin)
             {
                 return Redirect(command.ReturnUrl ?? "/Person/Index");
+            }
+            else if (result.Succeeded && isTeacherUser)
+            {
+                return Redirect(command.ReturnUrl ?? "/TeacherHome/Index");
+            }
+            else if (result.Succeeded && isPersonUser)
+            {
+                return Redirect(command.ReturnUrl ?? "/PersonHome/Index/"+ id);
             }
             ViewBag.Error = "Incorrect username or password";
             return View(command);

@@ -1,5 +1,6 @@
 ﻿using Library.Services.Interface;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Library.Services.Implementation
 {
@@ -11,15 +12,17 @@ namespace Library.Services.Implementation
         {
             this.userManager = userManager;
         }
-        public async Task CreatePersonUser(string userName, string password)
+        public async Task CreatePersonUser(string userName, string password, string id)
         {
             var identityUser = new IdentityUser(userName);
             var result = await userManager.CreateAsync(identityUser, password);
-
+            
             if(result.Succeeded)
             {
                 var user = await userManager.FindByNameAsync(userName);
-                var resultRole = await userManager.AddToRoleAsync(user,"Person");
+                await userManager.AddToRoleAsync(user,"Person");
+                await userManager.AddClaimAsync(user,new Claim("id", id));
+
             }
         }
     }
