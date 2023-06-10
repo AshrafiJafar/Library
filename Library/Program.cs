@@ -59,9 +59,7 @@ builder.Services.AddScoped<IPeopleService, PeopleService>();
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<ICommandTeacherService, CommandTeacherService>();
 builder.Services.AddScoped<ITeachersService, TeachersService>();
-builder.Services.AddScoped<IPersonUserService, PersonUserService>();
-builder.Services.AddScoped<ITeacherUserService, TeacherUserService>();
-
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

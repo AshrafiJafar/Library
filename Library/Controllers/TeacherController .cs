@@ -9,13 +9,11 @@ namespace Library.Controllers
     {
         private readonly ICommandTeacherService commandTeacherService;
         private readonly ITeachersService teachersService;
-        private readonly ITeacherUserService teacherUserService;
 
-        public TeacherController(ICommandTeacherService commandTeacherService, ITeachersService teachersService , ITeacherUserService teacherUserService )
+        public TeacherController(ICommandTeacherService commandTeacherService, ITeachersService teachersService)
         {
             this.commandTeacherService = commandTeacherService;
             this.teachersService = teachersService;
-            this.teacherUserService = teacherUserService;
         }
         public IActionResult Index()
         {
@@ -29,10 +27,9 @@ namespace Library.Controllers
             return PartialView("_Create");
         }
         [HttpPost]
-        public async Task<IActionResult> Create(RegisterTeacherCommand command)
+        public IActionResult Create(RegisterTeacherCommand command)
         {
-            var id = commandTeacherService.RegisterTeacher(command);
-            await teacherUserService.CreateTeacherUser(command.NationalCode, command.NationalCode, id.ToString());
+            commandTeacherService.RegisterTeacher(command);
             var teachers = teachersService.GetAllTeachers();
             return PartialView("_TableBody", teachers);
         }
@@ -67,36 +64,11 @@ namespace Library.Controllers
             var teachers = teachersService.GetAllTeachers();
             return PartialView("_TableBody", teachers);
         }
-       
 
         [HttpPost]
         public void Delete(int id)
         {
             commandTeacherService.DeleteTeacher(id);
-        }
-        [HttpGet]
-        public IActionResult Balance(int id)
-        {
-            var teacher = teachersService.GetTeacher(id);
-
-            var command = new DecreaseBalanceTeacher()
-            {
-                Id = teacher.Id,
-                FirstName = teacher.FirstName,
-                LastName = teacher.LastName,
-                Balance = teacher.Balance
-            };
-
-            return PartialView("_Balance", command);
-
-        }
-
-        [HttpPost]
-        public IActionResult Balance(DecreaseBalanceTeacher command)
-        {
-            commandTeacherService.DecreaseBalanceTeacher(command);
-            var teachers = teachersService.GetAllTeachers();
-            return PartialView("_TableBody", teachers);
         }
 
         [HttpGet]
@@ -122,7 +94,6 @@ namespace Library.Controllers
             };
 
             return PartialView("_Details", command);
-
         }
 
         [HttpPost]
@@ -137,11 +108,6 @@ namespace Library.Controllers
         {
             return PartialView("_TeachersTime");
         }
-        [HttpPost]
-        public IActionResult TeachersTime(TeachersTimeCommand command)
-        {
 
-            return PartialView("_TeachersTime");
-        }
     }
 }

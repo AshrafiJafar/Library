@@ -1,6 +1,6 @@
 ﻿namespace Library.Services.Interface
 {
-    public interface IPersonUserService
+    public interface IUserService
     {
         Task CreatePersonUser(string userName, string password,string id);
     }

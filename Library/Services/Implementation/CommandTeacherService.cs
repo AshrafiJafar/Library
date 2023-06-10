@@ -58,22 +58,7 @@ namespace Library.Services.Implementation
         {
             teacherRepository.Remove(id);
         }
-        public void DecreaseBalanceTeacher(DecreaseBalanceTeacher command)
-        {
-            if (command.Balance <= 0)
-            {
-                throw new Exception(" Balance chould not be zero or minus! ");
-            }
-            var teacher = teacherRepository.GetTeacherById(command.Id);
-            teacher.Balance += command.Balance;
-            teacherRepository.Update(teacher);
-
-        }
-        public void TeachersTimeCommand(TeachersTimeCommand command)
-        {
-
-        }
-
+      
         public void DatailsTeacher(DatailsTeacherCommand command)
         {
             var teacher = teacherRepository.GetTeacherById(command.Id);

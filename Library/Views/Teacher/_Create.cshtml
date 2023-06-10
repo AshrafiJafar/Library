@@ -61,7 +61,7 @@
             @Html.ValidationMessageFor(x=>x.Introduction , "", new{@class="text-danger"})
         </div>
         <div class="col-sm">
-            @Html.LabelFor( x => x.SubjectId, null, new{@class="form-label"})
+            @Html.LabelFor( x => x.Sports, null, new{@class="form-label"})
             @Html.DropDownListFor( x => x.SubjectId,selectlist  ,"Select Subject", new{@class="form-control" })
         </div>
     </div>

@@ -8,7 +8,5 @@ namespace Library.Services.Interface
         void EditTeacher(EditTeacherCommand Command);
         void DeleteTeacher(int id);
         void DatailsTeacher(DatailsTeacherCommand Command);
-        void DecreaseBalanceTeacher(DecreaseBalanceTeacher Command);
-        void TeachersTimeCommand(TeachersTimeCommand command);
     }
 }

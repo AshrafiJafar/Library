@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
 {
-    //[Authorize(Roles = "SalonAdmin")]
+    [Authorize(Roles = "SalonAdmin")]
     public class PersonController : Controller
     {
         private readonly ICommandPersonService commandPersonService;
         private readonly IPeopleService peopleService;
-        private readonly IPersonUserService personUserService;
+        private readonly IUserService userService;
 
-        public PersonController(ICommandPersonService commandPersonService, IPeopleService peopleService, IPersonUserService personUserService)
+        public PersonController(ICommandPersonService commandPersonService, IPeopleService peopleService, IUserService userService)
         {
             this.commandPersonService = commandPersonService;
             this.peopleService = peopleService;
-            this.personUserService = personUserService;
+            this.userService = userService;
         }
         public IActionResult Index()
         {
@@ -34,7 +34,7 @@ namespace Library.Controllers
         public async Task<IActionResult> Create(RegisterPersonCommand command)
         {
             var id = commandPersonService.RegisterPerson(command);
-            await personUserService.CreatePersonUser(command.NationalCode, command.NationalCode, id.ToString());
+            await userService.CreatePersonUser(command.NationalCode, command.NationalCode, id.ToString());
             var people = peopleService.GetAllPeople();
             return PartialView("_TableBody", people);
         }

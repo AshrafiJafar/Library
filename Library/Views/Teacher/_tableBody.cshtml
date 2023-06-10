@@ -28,8 +28,6 @@
             <i class="fa fa-pencil button" data-toggle="tooltip" title="Edit" style=" color:red;" onclick="editTeacher(@item.Id)"></i>
             <i class="fa fa-info button" data-toggle="tooltip" title="Details" style=" color:darkorange;" onclick="detailsTeacher(@item.Id)"></i>
             <i class="fa fa-trash-o button" data-toggle="tooltip" title="Delete" style=" color:mediumvioletred;" onclick="deleteTeacher(@item.Id , '@item.FirstName', '@item.LastName', event)"></i>
-            <i class="fa fa-check button" data-toggle="tooltip" title="Balance Decrease" style="color:green;" onclick="balanceTeacher(@item.Id)"></i>
-            <i class="fa fa-calendar button" data-toggle="tooltip" title="TeachersTime" style="color:slategray;" onclick="TeachersTime(@item.Id)"></i>
         </td>
         @*<a href="Person/Delete?personId=@item.Id">Delete</a>*@
         @*<a asp-action="edit" asp-route-id="?personId=@item.Id">Edit</a>*@
