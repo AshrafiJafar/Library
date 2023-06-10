@@ -56,7 +56,7 @@ namespace Library.Controllers
             }
             else if (result.Succeeded && isPersonUser)
             {
-                return Redirect(command.ReturnUrl ?? "/PersonHome/Index/"+ id);
+                return Redirect(command.ReturnUrl ?? "/PersonHome/Index?id="+ id);
             }
             ViewBag.Error = "Incorrect username or password";
             return View(command);

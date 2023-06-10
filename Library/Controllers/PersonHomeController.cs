@@ -1,4 +1,5 @@
-﻿using Library.Services.Interface;
+﻿using Library.Attributes;
+using Library.Services.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,10 +14,13 @@ namespace Library.Controllers
         {
             this.peopleService = peopleService;
         }
+
+        [AuthorizeAccess]
         public IActionResult Index(int id)
         {
             var person = peopleService.GetPerson(id);
             return View(person);
         }
+
     }
 }
