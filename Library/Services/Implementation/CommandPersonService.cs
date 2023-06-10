@@ -55,7 +55,7 @@ namespace Library.Services.Implementation
             personRepository.Remove(id);
         }
 
-        public void IncreaseBalance(IncreaseBalance command)
+        public void IncreaseBalance(IncreaseBalancePerson command)
         {
             if(command.Balance <= 0)
             {

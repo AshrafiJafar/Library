@@ -1,0 +1,86 @@
+﻿@using Library.Models.Command;
+@using Library.Models;
+@model EditTeacherCommand
+@{
+    var selectlist = SportType.List.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }).ToList();
+
+    Layout = null;
+}
+<form method="post" id="edit-form">
+    @Html.HiddenFor(x => x.Id)
+    <div class="row g-3">
+        <div class="col-sm">
+            @Html.TextBoxFor(x=> x.FirstName, "", new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.FirstName)})
+            @Html.ValidationMessageFor(x=>x.FirstName, "", new{@class="text-danger"})
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(x=> x.LastName, "", new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.LastName)} )
+            @Html.ValidationMessageFor(x=>x.LastName, "", new{@class="text-danger"})
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(x=> x.NationalCode, "", new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.NationalCode)})
+            @Html.ValidationMessageFor(x=>x.NationalCode, "", new{@class="text-danger"})
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-sm">
+            @Html.TextBoxFor(x => x.BirthDate,"MM/dd/yyyy", new {@class="form-control datepicker", autocomplete = "off", @placeholder=Html.DisplayNameFor(x => x.BirthDate)})
+            @Html.ValidationMessageFor(x => x.BirthDate, "",new{@class="text-danger"})
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(x=> x.Height, "", new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.Height)} )
+            @Html.ValidationMessageFor(x=>x.Height, "", new{@class="text-danger"})
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(x=> x.Weight, "", new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.Weight)} )
+            @Html.ValidationMessageFor(x=>x.Weight, "", new{@class="text-danger"})
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-sm">
+            @Html.TextBoxFor(x=> x.Mobile, "", new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.Mobile)} )
+            @Html.ValidationMessageFor(x=>x.Mobile, "", new{@class="text-danger"})
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(x=> x.PhoneNumber, "", new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.PhoneNumber)} )
+            @Html.ValidationMessageFor(x=>x.PhoneNumber, "", new{@class="text-danger"})
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(x=> x.NumberOfChilds, "", new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.NumberOfChilds)} )
+            @Html.ValidationMessageFor(x=>x.NumberOfChilds, "", new{@class="text-danger"})
+        </div>
+    </div>
+      
+      @*  <div class="col-sm">
+            @Html.TextBoxFor(x=> x.TeachersTimes,"", new{@class ="form-control timeAutocomplete",autocomplete = "off", @placeholder=Html.DisplayNameFor(x=>x.TeachersTimes)} )
+            @Html.ValidationMessageFor(x=>x.TeachersTimes , "", new{@class="text-danger"})
+        </div>*@
+    <div class="row g-3">
+        <div class="col-sm">
+            @Html.TextAreaFor(x=> x.Address,2,3, new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.Address)} )
+            @Html.ValidationMessageFor(x=>x.Address , "", new{@class="text-danger"})
+        </div>
+        <div class="col-sm">
+            @Html.TextAreaFor(x=> x.Introduction,2,3, new{@class ="form-control", @placeholder=Html.DisplayNameFor(x=>x.Introduction)} )
+            @Html.ValidationMessageFor(x=>x.Introduction , "", new{@class="text-danger"})
+        </div>
+        <div class="col-sm">
+            @Html.LabelFor( x => x.SubjectId, null, new{@class="form-label"})
+            @Html.DropDownListFor( x => x.SubjectId,selectlist  ,"Select Subject", new{@class="form-control" })
+        </div>
+    </div>
+</form>
+
+<script>
+    $('.datepicker').datepicker();
+
+    $('#from-24hr').timeAutocomplete({
+        formatter: '24hr',
+        value: '07:00:00'
+    });
+
+    $('#to-24hr').timeAutocomplete({
+        formatter: '24hr',
+        value: '09:30:00'
+    });
+</script>

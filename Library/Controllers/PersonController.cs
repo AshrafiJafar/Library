@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
 {
-    [Authorize(Roles = "SalonAdmin")]
+    //[Authorize(Roles = "SalonAdmin")]
     public class PersonController : Controller
     {
         private readonly ICommandPersonService commandPersonService;
         private readonly IPeopleService peopleService;
-        private readonly IUserService userService;
+        private readonly IPersonUserService personUserService;
 
-        public PersonController(ICommandPersonService commandPersonService, IPeopleService peopleService, IUserService userService)
+        public PersonController(ICommandPersonService commandPersonService, IPeopleService peopleService, IPersonUserService personUserService)
         {
             this.commandPersonService = commandPersonService;
             this.peopleService = peopleService;
-            this.userService = userService;
+            this.personUserService = personUserService;
         }
         public IActionResult Index()
         {
@@ -34,7 +34,7 @@ namespace Library.Controllers
         public async Task<IActionResult> Create(RegisterPersonCommand command)
         {
             var id = commandPersonService.RegisterPerson(command);
-            await userService.CreatePersonUser(command.NationalCode, command.NationalCode, id.ToString());
+            await personUserService.CreatePersonUser(command.NationalCode, command.NationalCode, id.ToString());
             var people = peopleService.GetAllPeople();
             return PartialView("_TableBody", people);
         }
@@ -81,7 +81,7 @@ namespace Library.Controllers
         {
             var person = peopleService.GetPerson(id);
 
-            var command = new IncreaseBalance()
+            var command = new IncreaseBalancePerson()
             {
                 Id = person.Id,
                 FirstName = person.FirstName,
@@ -93,7 +93,7 @@ namespace Library.Controllers
         }
 
         [HttpPost]
-        public IActionResult Balance(IncreaseBalance command)
+        public IActionResult Balance(IncreaseBalancePerson command)
         {
             commandPersonService.IncreaseBalance(command);
             var people = peopleService.GetAllPeople();

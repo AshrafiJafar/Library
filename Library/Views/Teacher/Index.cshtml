@@ -1,0 +1,346 @@
+﻿@model IEnumerable<Library.Models.Teacher>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Teacher Table</h1>
+
+<p>
+    <a href="#" onclick="addTeacher()">Create New</a>
+</p>
+
+<style>
+    .fa.button {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+        .fa.button:hover {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+</style>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.Sports)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeachersTimes)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @(await Html.PartialAsync("_TableBody", Model))
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        //$('[data-toggle=tooltip]').tooltip();
+
+        function addTeacher() {
+
+            var dialogAdd = bootbox.confirm(
+                {
+                    size: 'large',
+                    title: "Add Teacher",
+                    message: "Loading...",
+                    buttons: {
+                        confirm: {
+                            label: "Submit",
+                            className: "btn-success"
+                        },
+                        cancel: {
+                            label: "Cancel",
+                            className: "btn-danger"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result === true) {
+                            $("#create-form").removeData("unobtrusiveValidation");
+                            $.validator.unobtrusive.parse($("#create-form"));
+                            if (!$("#create-form").valid()) {
+                                $("#create-form").validate();
+                                return false;
+                            }
+                            var formData = $("#create-form").serializeArray();
+
+                            $.ajax({
+                                data: $(this).serialize(),
+                                url: "/Teacher/Create",
+                                method: "Post",
+                                data: formData,
+                                success: function (data) {
+                                    dialogAdd.modal("hide");
+
+                                    $('tbody').html(data);
+
+                                },
+                                error: function (result) {
+
+                                }
+                            });
+                            return false;
+                        }
+                    }
+                }
+            );
+            dialogAdd.init(function () {
+                $.ajax({
+                    url: "/Teacher/Create",
+                    method: "Get",
+                    success: function (data) {
+                        dialogAdd.find(".bootbox-body").html(data);
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+        }
+        function editTeacher(id) {
+            var dialogEdit = bootbox.confirm(
+                {
+                    size: 'large',
+                    title: "Edit Teacher",
+                    message: "Loading...",
+                    buttons: {
+                        confirm: {
+                            label: "Submit",
+                            className: "btn-success"
+                        },
+                        cancel: {
+                            label: "Cancel",
+                            className: "btn-danger"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result === true) {
+                            $("#edit-form").removeData("unobtrusiveValidation");
+                            $.validator.unobtrusive.parse($("#edit-form"));
+                            if (!$("#edit-form").valid()) {
+                                $("#edit-form").validate();
+                                return false;
+                            }
+                            var formData = $("#edit-form").serializeArray();
+                            $.ajax({
+                                url: "/Teacher/Edit",
+                                method: "Post",
+                                data: formData,
+                                success: function (data) {
+                                    dialogEdit.modal("hide");
+                                    $('tbody').html(data);
+                                },
+                                error: function (result) {
+                                }
+                            });
+                            return false;
+                        }
+                    }
+                }
+            );
+            dialogEdit.init(function () {
+                $.ajax({
+                    url: "/Teacher/Edit/" + id,
+                    method: "Get",
+                    success: function (data) {
+                        dialogEdit.find(".bootbox-body").html(data);
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+        }
+
+        function balanceTeacher(id) {
+
+            var dialogBalance = bootbox.confirm(
+                {
+                    size: 'large',
+                    title: "Balance Teacher",
+                    message: "Loading...",
+                    buttons: {
+                        confirm: {
+                            label: "Submit",
+                            className: "btn-success"
+                        },
+                        cancel: {
+                            label: "Cancel",
+                            className: "btn-danger"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result === true) {
+
+                            var formData = $("#balance-form").serializeArray();
+                            $.ajax({
+                                url: "/Teacher/Balance",
+                                method: "Post",
+                                data: formData,
+                                success: function (data) {
+                                    debugger;
+                                    dialogBalance.modal("hide");
+                                    $('tbody').html(data);
+
+                                },
+                                error: function (data) { }
+                            });
+
+
+                            return false;
+                        }
+                    }
+                }
+            );
+            dialogBalance.init(function () {
+                $.ajax({
+                    url: "/Teacher/Balance/" + id,
+                    method: "Get",
+                    success: function (data) {
+                        dialogBalance.find(".bootbox-body").html(data);
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+        }
+
+
+
+
+        function TeachersTime(id) {
+            var dialogTeachersTime = bootbox.confirm(
+                {
+                    size: 'xl',
+                    title: "TeachersTime",
+                    message: "Loading...",
+                    buttons: {
+                        confirm: {
+                            label: "Submit",
+                            className: "btn-success"
+                        },
+                        cancel: {
+                            label: "Cancel",
+                            className: "btn-danger"
+                        }
+                    },
+                    callback: function (result) {
+                        if (result === true) {
+                            var formData = $("#teachersTime-form").serializeArray();
+                            $.ajax({
+                                url: "/Teacher/TeachersTime",
+                                method: "Post",
+                                data: formData,
+                                success: function (data) {
+                                    dialogBalance.modal("hide");
+                                    $('tbody').html(data);
+                                },
+                            });
+                            return false;
+                        }
+                    }
+                }
+            );
+            dialogTeachersTime.init(function () {
+                $.ajax({
+                    url: "/Teacher/TeachersTime/" + id,
+                    method: "Get",
+                    success: function (data) {
+                        dialogTeachersTime.find(".bootbox-body").html(data);
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+        }
+
+        function detailsTeacher(id) {
+            var dialogdetails = bootbox.confirm(
+                {
+                    size: 'large',
+                    title: "Details Teacher",
+                    message: "Loading...",
+
+                    callback: function (result) {
+                        if (result === true) {
+                            var formData = $("#details-form").serializeArray();
+                            $.ajax({
+                                url: "/Teacher/Details",
+                                method: "Post",
+                                data: formData,
+                                success: function (data) {
+                                    dialogdetails.modal("hide");
+                                    $('tbody').html(data);
+                                },
+                                error: function (result) {
+                                }
+                            });
+                            return false;
+                        }
+                    }
+                }
+            );
+            dialogdetails.init(function () {
+                $.ajax({
+                    url: "/Teacher/Details/" + id,
+                    method: "Get",
+                    success: function (data) {
+                        dialogdetails.find(".bootbox-body").html(data);
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+        }
+
+        function deleteTeacher(id, firstName, lastname, e) {
+
+            bootbox.confirm(
+                {
+                    size: 'small',
+                    buttons: {
+                        confirm: {
+                            label: "Yes",
+                            className: "btn-success"
+                        },
+                        cancel: {
+                            label: "No",
+                            className: "btn-danger"
+                        }
+                    },
+                    message: 'Are you sure to delete' + firstName + ' ' + lastname + '?',
+                    callback: function (result) {
+                        if (result === true) {
+
+                            $.ajax({
+                                url: "/Teacher/Delete/" + id,
+                                method: "Post",
+                                success: function (result) {
+                                    //window.location.reload();
+                                    $(e.target).closest('tr').remove();
+                                },
+                                error: function (result) {
+                                    debugger;
+                                }
+
+                            });
+                        }
+                    }
+                }
+            );
+        }
+    </script>
+}

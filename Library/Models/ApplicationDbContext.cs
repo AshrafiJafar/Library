@@ -23,6 +23,10 @@ namespace Library.Models
             modelBuilder.Entity<Person>().Ignore(x => x.Age);
             modelBuilder.Entity<Person>().Property(x => x.BirthDate)
                 .HasColumnType(System.Data.SqlDbType.Date.ToString());
+            modelBuilder.Entity<Teacher>().Ignore(x => x.Age);
+            modelBuilder.Entity<Teacher>().Property(x => x.BirthDate)
+                .HasColumnType(System.Data.SqlDbType.Date.ToString());
+            base.OnModelCreating(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
