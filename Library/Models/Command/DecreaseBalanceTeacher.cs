@@ -1,6 +1,6 @@
 ﻿namespace Library.Models.Command
 {
-    public class IncreaseBalance
+    public class DecreaseBalanceTeacher
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -4,11 +4,11 @@ using System.Security.Claims;
 
 namespace Library.Services.Implementation
 {
-    public class UserService : IUserService
+    public class PersonUserService : IPersonUserService
     {
         private readonly UserManager<IdentityUser> userManager;
 
-        public UserService(UserManager<IdentityUser> userManager)
+        public PersonUserService(UserManager<IdentityUser> userManager)
         {
             this.userManager = userManager;
         }

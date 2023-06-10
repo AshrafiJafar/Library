@@ -56,7 +56,12 @@ builder.Services.AddScoped<ISportTypeRepository, SportTypeRepository>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<ICommandPersonService, CommandPersonService>();
 builder.Services.AddScoped<IPeopleService, PeopleService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
+builder.Services.AddScoped<ICommandTeacherService, CommandTeacherService>();
+builder.Services.AddScoped<ITeachersService, TeachersService>();
+builder.Services.AddScoped<IPersonUserService, PersonUserService>();
+builder.Services.AddScoped<ITeacherUserService, TeacherUserService>();
+
 
 var app = builder.Build();
 
